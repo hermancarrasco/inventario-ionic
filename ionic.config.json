@@ -1,0 +1,7 @@
+{
+  "name": "inventario",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
