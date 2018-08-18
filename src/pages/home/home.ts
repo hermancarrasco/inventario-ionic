@@ -23,6 +23,9 @@ export class HomePage {
       console.log('Barcode data', barcodeData);
       this.codigo=barcodeData.text;
       this.format=barcodeData.format;
+      if (barcodeData.cancelled) {
+        this.codigo="Se canceló el Scan";
+      }
 
      }).catch(err => {
          console.log('Error', err);
