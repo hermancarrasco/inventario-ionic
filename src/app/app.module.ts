@@ -18,6 +18,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 //Diagnostic
 import { Diagnostic } from '@ionic-native/diagnostic';
+import { EscanerProvider } from '../providers/escaner/escaner';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { Diagnostic } from '@ionic-native/diagnostic';
     SplashScreen,
     BarcodeScanner,
     Diagnostic,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    EscanerProvider
   ]
 })
 export class AppModule {}

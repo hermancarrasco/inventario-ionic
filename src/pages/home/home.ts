@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController,ToastController } from 'ionic-angular';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Diagnostic } from '@ionic-native/diagnostic';
+import { EscanerProvider } from '../../providers/escaner/escaner';
 
 
 @Component({
@@ -13,24 +14,34 @@ export class HomePage {
   codigo:string="";
   format:string="";
 
-  constructor(public navCtrl: NavController,private barcodeScanner: BarcodeScanner,private diagnostic: Diagnostic,private toastCtrl:ToastController) {
+  //escaneados:any[]=[];
+
+
+  constructor(public navCtrl: NavController,private barcodeScanner: BarcodeScanner,private diagnostic: Diagnostic,private toastCtrl:ToastController, private _es:EscanerProvider) {
 
   }
+  
 
 
   abrirCamara(){
     this.barcodeScanner.scan().then(barcodeData => {
       console.log('Barcode data', barcodeData);
       this.codigo=barcodeData.text;
+      //this.escaneados.push(barcodeData.text);
+      
       this.format=barcodeData.format;
+
       if (barcodeData.cancelled) {
         this.codigo="Se canceló el Scan";
+      }else{
+        this._es.agregarProducto(barcodeData.text);
       }
 
      }).catch(err => {
          console.log('Error', err);
          this.codigo=err;
      });
+     
   }
 
   verificarPermiso(){
